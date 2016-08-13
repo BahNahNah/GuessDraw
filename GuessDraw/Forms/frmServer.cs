@@ -102,7 +102,7 @@ namespace GuessDraw.Forms
                 case enPacket.ClearCanvas:
                 case enPacket.DrawDot:
                     if(sender.Status == PlayerStatus.Drawing)
-                        SendToAll(p, sender);
+                        SendToAll(p, sender, false);
                     break;
 
                 case enPacket.SetColor:
@@ -134,7 +134,7 @@ namespace GuessDraw.Forms
                         }
                         else
                         {
-                            SendToAll(new ChatPacket(sender.Name, msg), null);
+                            SendToAll(new ChatPacket(sender.Name, msg), null, false);
                         }
 
                     }
@@ -201,16 +201,22 @@ namespace GuessDraw.Forms
             SendToAll(new UpdatePlayerStatusPacket(i, s), null);
         }
 
-        private void SendToAll(Packet p, ConnectedClient dontSend)
+        private void SendToAll(Packet p, ConnectedClient dontSend, bool sendToIdles)
         {
             foreach(ConnectedClient c in Clients)
             {
                 if (c == dontSend)
                     continue;
-                if(c.Connected && c.Status != PlayerStatus.Idle)
+                if(c.Connected && (sendToIdles || c.Status != PlayerStatus.Idle))
                     c.Send(p);
             }
         }
+        private void SendToAll(Packet p, ConnectedClient dontSend)
+        {
+            SendToAll(p, dontSend, true);
+        }
+
+
         private void frmServer_Load(object sender, EventArgs e)
         {
 
