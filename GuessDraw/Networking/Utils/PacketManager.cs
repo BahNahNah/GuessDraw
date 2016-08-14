@@ -23,7 +23,6 @@ namespace GuessDraw.Networking.Utils
         private AsyncCallback RetrieveCallback;
         private byte[] PacketBuffer = new byte[1024];
         private MemoryStream PacketConstructor = new MemoryStream();
-        //private const byte MagicNumber = 0x55;
 
         public PacketManager(Socket _s)
         {
@@ -46,7 +45,6 @@ namespace GuessDraw.Networking.Utils
             using(MemoryStream ms = new MemoryStream(packet.Length + 4 + 1))
             using (BinaryWriter br = new BinaryWriter(ms))
             {
-                //br.Write(MagicNumber);
                 br.Write(packet.Length);
                 br.Write(packet);
                 lock(_lock)
@@ -89,11 +87,6 @@ namespace GuessDraw.Networking.Utils
                 
                 while (ms.Position != ms.Length)
                 {
-                   /* if (br.ReadByte() != MagicNumber)
-                    {
-                        NetworkSocket.BeginReceive(PacketBuffer, 0, PacketBuffer.Length, SocketFlags.None, RetrieveCallback, null);
-                        return;
-                    }*/
                     int len = br.ReadInt32();
 
                     if (CurrentPacketLength == 0)

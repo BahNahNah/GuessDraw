@@ -23,6 +23,7 @@ namespace GuessDraw.Forms
         string Username = string.Empty;
         int ID = 0;
         Dictionary<int, ListViewItemClient> Players = new Dictionary<int, ListViewItemClient>();
+
         public frmMain(string connectionName, string _IP, int _port)
         {
             InitializeComponent();
@@ -227,9 +228,6 @@ namespace GuessDraw.Forms
             {
                 Players[id].SubItems[1].Text = status.ToString();
             }
-
-           // if (id == ID)
-             //   SetDrawStatus(status == PlayerStatus.Drawing);
         }
 
         private void RemovePlayer(int id)
@@ -266,11 +264,6 @@ namespace GuessDraw.Forms
         {
             drawCanvas1.ClearDraw();
             client.Send(new ClearCanvasPacket());
-        }
-
-        private void frmMain_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void drawCanvas1_OnDotDraw(Color c, Point p)
@@ -319,7 +312,6 @@ namespace GuessDraw.Forms
                 return;
 
             tbChat.Text = string.Empty;
-           // HandleMessage(Username, tm);
             client.Send(new ChatPacket(tm));
         }
     }

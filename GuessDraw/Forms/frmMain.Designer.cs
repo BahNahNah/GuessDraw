@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.drawCanvas1 = new GuessDraw.Controls.DrawCanvas();
             this.lbChatLog = new System.Windows.Forms.ListBox();
             this.tbChat = new System.Windows.Forms.TextBox();
             this.lvPlayerList = new System.Windows.Forms.ListView();
@@ -38,12 +39,11 @@
             this.btnSetSize = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.brushPreview1 = new GuessDraw.Controls.BrushPreview();
             this.lblDrawWord = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.pbTimer = new System.Windows.Forms.ProgressBar();
-            this.brushPreview1 = new GuessDraw.Controls.BrushPreview();
-            this.drawCanvas1 = new GuessDraw.Controls.DrawCanvas();
             this.panel1.SuspendLayout();
             this.gbDrawing.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -58,6 +58,18 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(331, 498);
             this.panel1.TabIndex = 0;
+            // 
+            // drawCanvas1
+            // 
+            this.drawCanvas1.BackColor = System.Drawing.Color.White;
+            this.drawCanvas1.CanDraw = true;
+            this.drawCanvas1.DrawingSize = 10;
+            this.drawCanvas1.Location = new System.Drawing.Point(3, 3);
+            this.drawCanvas1.Name = "drawCanvas1";
+            this.drawCanvas1.Size = new System.Drawing.Size(325, 492);
+            this.drawCanvas1.TabIndex = 0;
+            this.drawCanvas1.Text = "drawCanvas1";
+            this.drawCanvas1.OnDotDraw += new GuessDraw.Controls.OnDotDrawDelegate(this.drawCanvas1_OnDotDraw);
             // 
             // lbChatLog
             // 
@@ -139,6 +151,14 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // brushPreview1
+            // 
+            this.brushPreview1.Location = new System.Drawing.Point(76, 23);
+            this.brushPreview1.Name = "brushPreview1";
+            this.brushPreview1.Size = new System.Drawing.Size(50, 50);
+            this.brushPreview1.TabIndex = 1;
+            this.brushPreview1.Text = "brushPreview";
+            // 
             // lblDrawWord
             // 
             this.lblDrawWord.AutoSize = true;
@@ -177,26 +197,6 @@
             this.pbTimer.Size = new System.Drawing.Size(203, 23);
             this.pbTimer.TabIndex = 0;
             // 
-            // brushPreview1
-            // 
-            this.brushPreview1.Location = new System.Drawing.Point(76, 23);
-            this.brushPreview1.Name = "brushPreview1";
-            this.brushPreview1.Size = new System.Drawing.Size(50, 50);
-            this.brushPreview1.TabIndex = 1;
-            this.brushPreview1.Text = "brushPreview";
-            // 
-            // drawCanvas1
-            // 
-            this.drawCanvas1.BackColor = System.Drawing.Color.White;
-            this.drawCanvas1.CanDraw = true;
-            this.drawCanvas1.DrawingSize = 10;
-            this.drawCanvas1.Location = new System.Drawing.Point(3, 3);
-            this.drawCanvas1.Name = "drawCanvas1";
-            this.drawCanvas1.Size = new System.Drawing.Size(325, 492);
-            this.drawCanvas1.TabIndex = 0;
-            this.drawCanvas1.Text = "drawCanvas1";
-            this.drawCanvas1.OnDotDraw += new GuessDraw.Controls.OnDotDrawDelegate(this.drawCanvas1_OnDotDraw);
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -212,7 +212,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmMain";
             this.Text = "GuessDraw";
-            this.Load += new System.EventHandler(this.frmMain_Load);
             this.panel1.ResumeLayout(false);
             this.gbDrawing.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
